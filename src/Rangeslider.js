@@ -214,6 +214,9 @@ class Slider extends Component {
     const fillStyle = { [dimension]: `${coords.fill}px` }
     const handleStyle = { [direction]: `${coords.handle}px` }
 
+    const calloutOffset = 21;
+    const calloutStyle = { [direction]: `${coords.handle + calloutOffset}px` }
+
     return (
       <div
         ref={(s) => { this.slider = s }}
@@ -234,9 +237,21 @@ class Slider extends Component {
           onTouchMove={this.handleDrag}
           style={handleStyle}
         />
+        <div
+          className='rangeslider__callout'
+          style={calloutStyle}
+          onMouseDown={this.handleStart}
+          onTouchEnd={this.handleNoop}
+          onTouchMove={this.handleDrag}
+        >
+          <div className='rangeslider__callout_inner'>
+            {this.props.callout}
+          </div>
+        </div>
       </div>
     )
   }
 }
 
 export default Slider
+
